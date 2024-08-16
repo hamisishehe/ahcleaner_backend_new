@@ -31,7 +31,7 @@ public class CategoryController {
     public String categories(Model model) {
         List<Category> categories = categoryService.allcategories();
         model.addAttribute("categories", categories);
-        return "/admin/categories";
+        return "admin/categories";
     }
 
 
@@ -39,7 +39,7 @@ public class CategoryController {
     @PostMapping("/admin/categories/add-category")
     public String addcategory(@Valid Category category, BindingResult result, @RequestParam("file") MultipartFile file, Model model) {
         if (result.hasErrors()) {
-            return "/admin/categories";
+            return "admin/categories";
         }
         categoryService.saveCategory(category, file);
         model.addAttribute("successMessage", "Category added successfully!");

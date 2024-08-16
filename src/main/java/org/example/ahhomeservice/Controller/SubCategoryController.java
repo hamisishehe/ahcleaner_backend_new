@@ -36,7 +36,7 @@ public class SubCategoryController {
       List<Category> categories = categoryService.allcategories();
       model.addAttribute("subcategories", subCategories);
       model.addAttribute("categories", categories);
-      return "/admin/subcategories";
+      return "admin/subcategories";
 
   }
 
