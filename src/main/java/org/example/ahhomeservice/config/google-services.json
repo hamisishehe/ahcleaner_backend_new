@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "587122461926",
+    "project_id": "my-ahcleaner",
+    "storage_bucket": "my-ahcleaner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587122461926:android:a39c5742352d2dbc0dff27",
+        "android_client_info": {
+          "package_name": "com.example.ahcleaner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "587122461926-t03koegsinbqosv1k1rvv7av28kjm257.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ahcleaner",
+            "certificate_hash": "a3718e546c611e5df49fec3b04a2a42126027c7e"
+          }
+        },
+        {
+          "client_id": "587122461926-74tc25vmv7umj0j1lvgc0h63df2hi642.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkeBB-EN0vFJCottvuu05yVpnKKSPX4oc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "587122461926-74tc25vmv7umj0j1lvgc0h63df2hi642.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "587122461926-l85aa4vbk7srbfuj4lb2ofbuqjdsrigj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ahcleaner"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

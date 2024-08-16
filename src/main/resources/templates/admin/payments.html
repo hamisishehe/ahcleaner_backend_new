@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{admin/app}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<body>
+<div layout:fragment="content">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Payments</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Payments</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Transaction_id</th>
+                                    <th>Username</th>
+                                    <th>Total Amount</th>
+                                    <th>Payment Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="payments : ${payments}">
+                                    <td th:text="${payments.transaction_id}"></td>
+                                    <td th:text="${payments.booking.user.username}"></td>
+                                    <td th:text="${payments.booking.total_amount}"></td>
+                                    <td th:text="${payments.booking.paymentstatus}"></td>
+
+                                </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+
+                    <!-- /.card -->
+                </div>
+
+                <!-- Your content here -->
+            </div>
+            <!-- Your content here -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+
+</div>
+</body>
+
+</html>

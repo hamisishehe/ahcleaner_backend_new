@@ -1,0 +1,172 @@
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{admin/app}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<body>
+<div layout:fragment="content">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Services</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">services</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modal-default">
+                                Add New Service
+                            </button>
+
+
+                        </div>
+
+
+                        <div th:if="${successMessage}" >
+                            <div class="alert alert-primary alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <h6 th:text="${successMessage}" class="text-white text-bold"></h6>
+                            </div>
+
+                        </div>
+
+                        <div th:if="${errorMessage}" >
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <h6 th:text="${errorMessage}" class="text-white text-bold"></h6>
+                            </div>
+
+                        </div>
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Category Name</th>
+                                    <th>SubCategory Name</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Image</th>
+                                    <th>Description</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="service : ${services}">
+                                    <td th:text="${service.id}"></td>
+                                    <td th:text="${service.subCategory.category.cat_name}"></td>
+                                    <td th:text="${service.subCategory.subcat_name}"></td>
+                                    <td th:text="${service.service_name}"></td>
+                                   <td th:text="${service.service_price}"></td>
+                                    <td> <img th:src="@{${service.service_image}}" alt="Category Image" width="50" height="50"/></td>
+                                    <td th:text="${service.description}"></td>
+                                    <td> <a th:href="@{'/admin/edit-service/' + ${service.id}  }" class="btn btn-default">
+                                        <span class="fa fa-edit"></span>
+                                    </a>
+                                    </td>
+
+                                    <td><form th:action="@{/admin/services/delete}" method="post">
+                                        <input type="hidden" th:name="id" th:value="${service.id}">
+                                        <button type="submit" class="btn danger" ><span class="fa fa-trash-alt"></span></button>
+                                    </form></td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+
+                    <!-- /.card -->
+                </div>
+
+                <!-- Your content here -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content -->
+    </div>
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add service</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <form th:action="@{/admin/service/add-service}" method="post" enctype="multipart/form-data" th:object="${category}">
+                            <div class="form-group">
+                                <label>Category Name:</label>
+                                <div class="input-group">
+                                    <select class="form-control" name="subcategory_id" >
+                                        <option th:each="cat: ${subcategories}" th:value="${cat.id}" th:text="${cat.subcat_name}"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Service Image:</label>
+                                <div class="input-group">
+                                    <input type="file" class="form-control" name="file" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Service Name:</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="service_name" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Service Price:</label>
+                                <div class="input-group mb-3">
+                                    <input type="number" class="form-control" name="service_price" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Category Description:</label>
+                                <div class="input-group mb-3">
+                                    <textarea name="description" rows="5" cols="20" class="form-control"  required></textarea>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-dark">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.content -->
+</div>
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{admin/app}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<body>
+<div layout:fragment="content">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Users</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Users</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modal-default">
+                                Add New User
+                            </button>
+                        </div>
+
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Phonenumber</th>
+                                    <th>Role</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="users : ${users}">
+                                    <td th:text="${users.id}"></td>
+                                    <td th:text="${users.username}"></td>
+                                    <td th:text="${users.email}"></td>
+                                    <td th:text="${users.phonenumber}"></td>
+                                    <td th:text="${users.role}"></td>
+                                    <td><a th:href="@{/admin/users/edituser/{id}(id=${users.id})}"> <span class="fa  fa-edit"></span> </a> </td>
+                                    <td><a href="/admin/users/edituser/{id}(id=${users.id})"> <span class="fa  fa-trash-alt"></span> </a> </td>
+
+                                </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+
+                    <!-- /.card -->
+                </div>
+
+                <!-- Your content here -->
+            </div>
+            <!-- Your content here -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add User</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <form th:action="@{/admin/users/add-user}" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>User Name:</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="username" placeholder="User Name" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <div class="input-group">
+                                <input type="email" class="form-control" name="email" placeholder="email" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phonenumber:</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="phonenumber" placeholder="Phone Number" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Role:</label>
+                            <div class="input-group">
+                                <select name="role" class="form-control">
+                                    <option value="ADMIN">ADMIN</option>
+                                    <option value="CUSTOMER">CUSTOMER</option>
+                                    <option value="SERVICE_PROVIDER">SERVICE_PROVIDER</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>
+</body>
+
+</html>
