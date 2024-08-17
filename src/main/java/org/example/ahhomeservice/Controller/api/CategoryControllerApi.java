@@ -20,7 +20,7 @@ public class CategoryControllerApi {
 
     @GetMapping("/api/categories")
     public List<Category> getcategory(){
-        return  categoryService.allCategories();
+        return  categoryService.allcategories();
     }
 
 

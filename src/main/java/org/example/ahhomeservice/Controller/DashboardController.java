@@ -45,7 +45,7 @@ public class DashboardController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentuser = authentication.getName();
 
-        Long categories = categoryService.countAll();
+        Long categories = categoryService.countall();
 
 
         Long subCategories = subCategoryService.countall();

@@ -33,7 +33,7 @@ public class SubCategoryController {
   @GetMapping("/admin/subcategories")
     public String subcategory(Model model){
       List<SubCategory> subCategories = subCategoryService.getallsubcategories();
-      List<Category> categories = categoryService.allCategories();
+      List<Category> categories = categoryService.allcategories();
       model.addAttribute("subcategories", subCategories);
       model.addAttribute("categories", categories);
       return "admin/subcategories";
@@ -48,7 +48,7 @@ public class SubCategoryController {
       return "redirect:/admin/subcategories";
     }
 
-    Category category = categoryService.findById(categoryId);
+    Category category = categoryService.findbyid(categoryId);
     subCategory.setCategory(category);
     subCategoryService.saveSubCategory(subCategory, file);
     redirectAttributes.addFlashAttribute("successMessage", "Category added successfully!");
