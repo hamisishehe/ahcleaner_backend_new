@@ -2,6 +2,7 @@ package org.example.ahhomeservice.Service;
 
 import org.example.ahhomeservice.Model.Category;
 import org.example.ahhomeservice.Repository.CategoryRepository;
+import org.example.ahhomeservice.config.FileStorageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,7 +17,12 @@ import java.util.Optional;
 @Service
 public class CategoryService {
 
-    private final Path rootLocation = Paths.get("src/main/resources/static/uploads");
+    private final Path rootLocation;
+
+    @Autowired
+    public CategoryService(FileStorageProperties fileStorageProperties) {
+        this.rootLocation = Paths.get(fileStorageProperties.getUploadDir()).toAbsolutePath().normalize();
+    }
 
 
     @Autowired
