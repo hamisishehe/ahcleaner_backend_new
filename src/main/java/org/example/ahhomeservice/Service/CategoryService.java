@@ -3,11 +3,12 @@ package org.example.ahhomeservice.Service;
 import org.example.ahhomeservice.Model.Category;
 import org.example.ahhomeservice.Repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.thymeleaf.util.StringUtils;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -16,18 +17,26 @@ import java.util.Optional;
 @Service
 public class CategoryService {
 
-    private final Path rootLocation = Paths.get("src/main/resources/static/uploads");
-
+    private final Path rootLocation;
 
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Value("${file.upload-dir}")
+    private String uploadDir;
 
-    public Long countall(){
-     Long count = categoryRepository.count();
-     return count;
+    public CategoryService() {
+        this.rootLocation = Paths.get(uploadDir);
+        try {
+            Files.createDirectories(this.rootLocation);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not create upload directory!", e);
+        }
     }
 
+    public Long countAll() {
+        return categoryRepository.count();
+    }
 
     public Category saveCategory(Category category, MultipartFile file) {
         try {
@@ -46,21 +55,20 @@ public class CategoryService {
         }
     }
 
-    public List<Category> allcategories(){
+    public List<Category> allCategories() {
         return categoryRepository.findAll();
     }
 
-    public void deleteCategory(long id){
+    public void deleteCategory(long id) {
         categoryRepository.deleteById(id);
     }
 
-    public Category findbyid(Long id){
+    public Category findById(Long id) {
         Optional<Category> category = categoryRepository.findById(id);
-        return  category.orElse(null);
+        return category.orElse(null);
     }
 
-    public void updatecategory(Category category){
-         categoryRepository.save(category);
+    public void updateCategory(Category category) {
+        categoryRepository.save(category);
     }
-
 }
