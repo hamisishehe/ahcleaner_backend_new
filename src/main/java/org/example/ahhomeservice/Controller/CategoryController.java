@@ -23,13 +23,15 @@ public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
+
+
     @Autowired
     private CategoryRepository categoryRepository;
 
 
     @GetMapping("/admin/categories")
     public String categories(Model model) {
-        List<Category> categories = categoryService.allcategories();
+        List<Category> categories = categoryService.allCategories();
         model.addAttribute("categories", categories);
         return "admin/categories";
     }
@@ -50,7 +52,7 @@ public class CategoryController {
 
     @GetMapping("/admin/edit-category/{id}")
     public String editcategory(@PathVariable("id") Long id, Model model){
-        Category category = categoryService.findbyid(id);
+        Category category = categoryService.findById(id);
         model.addAttribute("category", category);
         return "admin/edit-category";
 
@@ -74,12 +76,12 @@ public class CategoryController {
     @PostMapping("/admin/categories/update")
     public String updateProduct(@RequestParam("id") Long id, @RequestParam("cat_name") String cat_name, @RequestParam("cat_description") String cat_description, RedirectAttributes redirectAttributes){
 
-        Category category = categoryService.findbyid(id);
+        Category category = categoryService.findById(id);
 
         category.setCat_name(cat_name);
         category.setCat_description(cat_description);
 
-        categoryService.updatecategory(category);
+        categoryService.updateCategory(category);
 
         redirectAttributes.addFlashAttribute("successMessage", "Category Updated");
         return "redirect:/admin/categories";
